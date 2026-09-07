@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  frontend:
+  app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,16 +15,7 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
-
-  worker:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: worker
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - run: npm install
-      - run: npx wrangler deploy --dry-run --outdir dist-worker
+      - run: node --check api/health.js
+      - run: node --check api/lesson.js
+      - run: node --check api/video-url.js
+      - run: node --check server/r2.js
