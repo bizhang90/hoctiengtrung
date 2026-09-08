@@ -29,6 +29,8 @@ export function getR2Client() {
       secretAccessKey: config.secretAccessKey,
     },
     forcePathStyle: true,
+    requestChecksumCalculation: 'WHEN_REQUIRED',
+    responseChecksumValidation: 'WHEN_REQUIRED',
   })
 }
 
